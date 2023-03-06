@@ -9,8 +9,5 @@
 export default {
   name: "ModalBox",
   props: ["error"],
-  setup(props) {
-    console.log(props.error);
-  },
 };
 </script>
