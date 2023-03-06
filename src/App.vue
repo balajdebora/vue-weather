@@ -34,25 +34,27 @@ export default {
     async fetchWeather(e, location) {
       try {
         if (e.key === "Enter") {
-          const results = await axios(
+          const result = await axios(
             `${this.url_base}weather?q=${location}&units=metric&APPID=${this.api_key}`
           );
-          const { data } = await results;
+          const { data } = await result;
 
-          this.setResults(data);
-          this.setError(false);
+          this.setStatus({
+            status: data,
+            error: false,
+          });
         }
       } catch (error) {
         const { response } = error;
 
-        this.setResults({});
-        this.setError(response?.data?.cod);
+        this.setStatus({
+          status: {},
+          error: response?.data?.cod,
+        });
       }
     },
-    setResults(results) {
-      this.weather = results;
-    },
-    setError(error) {
+    setStatus({ status, error }) {
+      this.weather = status;
       this.error = error;
     },
   },
