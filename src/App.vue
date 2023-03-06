@@ -38,10 +38,13 @@ export default {
             `${this.url_base}weather?q=${location}&units=metric&APPID=${this.api_key}`
           );
           const { data } = await results;
+
           this.setResults(data);
+          this.setError(false);
         }
       } catch (error) {
         const { response } = error;
+
         this.setResults({});
         this.setError(response?.data?.cod);
       }
